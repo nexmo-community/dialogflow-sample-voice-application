@@ -24,8 +24,9 @@ Default local (not public!) reference connection code `port` is: 5000.
 If you plan to test using `Local deployment` with ngrok (Internet tunneling service) for both the Dialogflow reference connection code and this sample application, you may set up [multiple ngrok tunnels](https://ngrok.com/docs#multiple-tunnels).
 
 For the next steps, you will need:
-- The Dialogflow reference connection code server's public hostname and if necessary public port,</br>
-e.g. `xxxxxxxx.ngrok.io`, `xxxxxxxx.herokuapp.com`, `myserver.mycompany.com:32000`  (as **`DF_CONNECTING_SERVER`**, no `port` is necessary with ngrok or heroku as public hostname)
+- The Dialogflow reference connection code server's public hostname and if necessary public port.</br>
+
+e.g. `xxxxxxxx.ngrok.io`, `xxxxxxxx.herokuapp.com`, `myserver.mycompany.com:32000`  (as **`DF_CONNECTING_SERVER`**, no `port`, https:// nor http:// are necessary with ngrok or heroku as public hostname)
 
 ## Set up your Vonage Voice API application credentials and phone number
 
@@ -56,8 +57,8 @@ For the next steps, you will need:</br>
 
 ## Overview on how this sample Voice API application works
 
-- On an incoming call to the **`phone number linked`** to your application, GET `/answer` route plays a TTS greeting to the caller ("action": "talk"), then start a WebSocket connection to the Lex reference connection ("action": "connect"),
-- Once the WebSocket is established (GET `/ws_event` with status "answered"), it plays a TTS greeting to Lex bot, as Lex expects the user to speak first, we need to start the conversation as one would do in a phone call, with the answerer greeting the caller. The result is that the caller will immediately hear the Dialogflow agent initial greeting (e.g. "How may I help you?") without having to say anything yet.
+- On an incoming call to the **`phone number linked`** to your application, GET `/answer` route plays a TTS greeting to the caller ("action": "talk"), then start a WebSocket connection to the Dialogflow agent reference connection ("action": "connect"),
+- Once the WebSocket is established (GET `/ws_event` with status "answered"), it plays a TTS greeting to this Dialogflow agent, as the Dialogflow agent expects the user to speak first, we need to start the conversation as one would do in a phone call, with the answerer greeting the caller. The result is that the caller will immediately hear the Dialogflow agent initial greeting (e.g. "How may I help you?") without having to say anything yet.
 You can customize that inital TTS played to Dialogflow to correspond to your Dialogflow agent programming and use case.
 - Transcripts and sentiment scores will be received by this application in real time,</br>
 - When the caller hangs up, both phone call leg and WebSocket leg will be automatically terminated.
