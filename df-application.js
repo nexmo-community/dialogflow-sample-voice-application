@@ -3,7 +3,7 @@
 require('dotenv').config();
 
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const app = express();
 // const expressWs = require('express-ws')(app);
 // const { Readable } = require('stream');
